@@ -22,9 +22,21 @@ shouldTestMylast =
           TestCase  ( assertEqual "should return Nothing when given empty list" (Nothing) ( myLast ([]::[Int])))
          ]
 
+shouldTestMyButlast =
+        [
+          TestCase  ( assertEqual "should return the actual but one item" (Just 3) ( myButLast [1,2,3,4])),
+          TestCase  ( assertEqual "should return Nothing when given empty list" (Nothing) ( myButLast ([]::[Int])))
+         ]
+
+shouldTestElementAt =
+        [
+          TestCase  ( assertEqual "should return the actual element at" 2 ( elementAt [1,2,7,1] 2)),
+          TestCase  ( assertEqual "should return the actual element at" 9 ( elementAt [1,7,1,9] 4))
+         ]
+
 main :: IO ()
 main = do
-    cs@(Counts _ _ errs fails) <- runTestTT $ TestList shouldTestMylast
+    cs@(Counts _ _ errs fails) <- runTestTT $ TestList ( shouldTestMylast ++ shouldTestMyButlast ++ shouldTestElementAt)
     putStrLn (showCounts cs)
     if (errs > 0 || fails > 0)
         then exitFailure

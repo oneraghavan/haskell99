@@ -6,15 +6,8 @@ import Test.Framework.Providers.HUnit
 import Test.HUnit as Hunit
 
 import Problems1to10
---import qualified Problems11_20
---import qualified Problems21_30
 
 import System.Exit
-
---testProblem1 = TestCase  ( assertEqual
---  "should return the actual last item" (Just 4) ( myLast [1,2,3,4]))
---
---testProblem2 = TestCase  ( assertEqual "should return Nothing when given empty list" (Nothing) ( myLast ([]::[Int])))
 
 shouldTestMylast =
         [
@@ -47,9 +40,24 @@ shouldTestmyReverse =
           TestCase  ( assertEqual "should return empty array for empty array" ([]) ( myReverse ([]::[Int])))
          ]
 
+shouldTestisPalindrome =
+        [
+          TestCase  ( assertEqual "should return true for a palindrom array" True ( isPalindrome [1,2,2,1])),
+          TestCase  ( assertEqual "should return revesre of array" True ( isPalindrome "abcba")),
+          TestCase  ( assertEqual "should reverse the  array" False ( isPalindrome [1,3,2,1])),
+          TestCase  ( assertEqual "should return revesre of array" False ( isPalindrome "abcde")),
+          TestCase  ( assertEqual "should return empty array for empty array" True ( isPalindrome ([]::[Int])))
+         ]
+
+shouldTestflatten =
+        [
+          TestCase  ( assertEqual "should return true for a palindrom array" [1,2,3,4,5] ( flatten (List [Elem 1, List [Elem 2, List [Elem 3, Elem 4], Elem 5]])))
+         ]
+
 main :: IO ()
 main = do
-    cs@(Counts _ _ errs fails) <- runTestTT $ TestList ( shouldTestMylast ++ shouldTestMyButlast ++ shouldTestElementAt ++ shouldTestmyLength ++ shouldTestmyReverse)
+    cs@(Counts _ _ errs fails) <- runTestTT $ TestList ( shouldTestMylast ++ shouldTestMyButlast ++
+      shouldTestElementAt ++ shouldTestmyLength ++ shouldTestmyReverse ++ shouldTestisPalindrome ++ shouldTestisflatten)
     putStrLn (showCounts cs)
     if (errs > 0 || fails > 0)
         then exitFailure

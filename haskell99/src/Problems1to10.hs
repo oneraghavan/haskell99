@@ -23,3 +23,13 @@ myLength (x:xs) = 1 + myLength xs
 myReverse :: [a] -> [a]
 myReverse [] = []
 myReverse (x:xs) = myReverse xs ++ [x]
+
+isPalindrome ::(Eq a) => [a] -> Bool
+isPalindrome xs = xs == (reverse xs)
+
+
+data NestedList a = Elem a | List[NestedList a]
+flatten :: NestedList a -> [a]
+flatten (List []) = []
+flatten (Elem a) = [a]
+flatten (List (x:xs)) = flatten x ++ flatten (List (xs))

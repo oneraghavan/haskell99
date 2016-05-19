@@ -11,17 +11,20 @@ import Problems1to10
 
 import System.Exit
 
-testProblem1 = TestCase  ( assertEqual
-  "should return the actual last item" (Just 4) ( myLast [1,2,3,4]))
+--testProblem1 = TestCase  ( assertEqual
+--  "should return the actual last item" (Just 4) ( myLast [1,2,3,4]))
+--
+--testProblem2 = TestCase  ( assertEqual "should return Nothing when given empty list" (Nothing) ( myLast ([]::[Int])))
 
-testProblem2 = TestCase  ( assertEqual
-  "should Nothing" (Nothing) ( myLast ([]::[Int])))
-
-tests = [ testProblem1 , testProblem2 ]
+shouldTestMylast =
+        [
+          TestCase  ( assertEqual "should return the actual last item" (Just 4) ( myLast [1,2,3,4])),
+          TestCase  ( assertEqual "should return Nothing when given empty list" (Nothing) ( myLast ([]::[Int])))
+         ]
 
 main :: IO ()
 main = do
-    cs@(Counts _ _ errs fails) <- runTestTT $ TestList tests
+    cs@(Counts _ _ errs fails) <- runTestTT $ TestList shouldTestMylast
     putStrLn (showCounts cs)
     if (errs > 0 || fails > 0)
         then exitFailure

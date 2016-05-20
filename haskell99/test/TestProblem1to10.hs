@@ -54,10 +54,29 @@ shouldTestflatten =
           TestCase  ( assertEqual "should return true for a palindrom array" [1,2,3,4,5] ( flatten (List [Elem 1, List [Elem 2, List [Elem 3, Elem 4], Elem 5]])))
          ]
 
+shouldTestcompress =
+        [
+          TestCase  ( assertEqual "should compress the array" "abce" ( compress "aaabbccabeee" )),
+          TestCase  ( assertEqual "should compress the array" [] ( compress ([]::[Int]) ))
+         ]
+
+shouldTestpack =
+        [
+          TestCase  ( assertEqual "should pack the array" ["aaa","bb","c","ee"] ( pack "aaabbccabeee" )),
+          TestCase  ( assertEqual "should pack an empty array" [] ( pack ([]::[Int]) ))
+         ]
+
+shouldTestEncode =
+        [
+          TestCase  ( assertEqual "should pack the array" [(5,'a'),(3,'b'),(2,'c'),(3,'e')] (encode "aaabbccabeeea" )),
+          TestCase  ( assertEqual "should pack an empty array" [] ( encode ([]::[Int]) ))
+         ]
+
 main :: IO ()
 main = do
     cs@(Counts _ _ errs fails) <- runTestTT $ TestList ( shouldTestMylast ++ shouldTestMyButlast ++
-      shouldTestElementAt ++ shouldTestmyLength ++ shouldTestmyReverse ++ shouldTestisPalindrome ++ shouldTestisflatten)
+      shouldTestElementAt ++ shouldTestmyLength ++ shouldTestmyReverse ++ shouldTestisPalindrome ++
+      shouldTestflatten ++ shouldTestcompress ++ shouldTestpack ++ shouldTestEncode)
     putStrLn (showCounts cs)
     if (errs > 0 || fails > 0)
         then exitFailure

@@ -33,3 +33,15 @@ flatten :: NestedList a -> [a]
 flatten (List []) = []
 flatten (Elem a) = [a]
 flatten (List (x:xs)) = flatten x ++ flatten (List (xs))
+
+compress :: Eq a => [a] -> [a]
+compress [] = []
+compress (x:xs) = x : (compress (filter (/= x) xs))
+
+pack :: Eq a => [a] -> [[a]]
+pack [] = []
+pack (x:xs) = (filter (==x) xs) : pack (filter (/=x) xs)
+
+encode :: Eq a => [a] -> [(Int,a)]
+encode [] = []
+encode (x:xs) = (length (filter (== x) (x:xs)),x) : encode (filter (/= x) xs)

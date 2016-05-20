@@ -24,7 +24,7 @@ executable haskell99
 Test-Suite test-foo
     type:       exitcode-stdio-1.0
     hs-source-dirs: test, src
-    main-is:    TestProblem1to10.hs
+    main-is:    main.hs
     build-depends:  base,
                     random,
                     HUnit,

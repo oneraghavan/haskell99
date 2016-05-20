@@ -1,4 +1,4 @@
-module Main where
+module TestProblem1to10 where
 
 import Test.Framework
 import Test.Framework.Providers.HUnit
@@ -72,12 +72,8 @@ shouldTestEncode =
           TestCase  ( assertEqual "should pack an empty array" [] ( encode ([]::[Int]) ))
          ]
 
-main :: IO ()
-main = do
-    cs@(Counts _ _ errs fails) <- runTestTT $ TestList ( shouldTestMylast ++ shouldTestMyButlast ++
-      shouldTestElementAt ++ shouldTestmyLength ++ shouldTestmyReverse ++ shouldTestisPalindrome ++
-      shouldTestflatten ++ shouldTestcompress ++ shouldTestpack ++ shouldTestEncode)
-    putStrLn (showCounts cs)
-    if (errs > 0 || fails > 0)
-        then exitFailure
-        else exitSuccess
+testProblem1to10 = shouldTestMylast ++ shouldTestMyButlast ++ shouldTestElementAt ++
+                   shouldTestmyLength ++ shouldTestmyReverse ++ shouldTestisPalindrome ++
+                   shouldTestflatten ++ shouldTestcompress ++ shouldTestpack ++ shouldTestEncode ++
+                   shouldTestEncode
+

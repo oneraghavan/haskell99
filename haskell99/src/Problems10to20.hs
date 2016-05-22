@@ -29,3 +29,9 @@ repli [] c = []
 repli (x:[]) 1 = [x]
 repli (x:[]) c = [x] ++ (repli [x] (c - 1))
 repli (x:xs) c = (repli [x] c) ++ (repli (xs) c)
+
+dropEvery :: [a] -> Int  -> [a]
+dropEvery xs n = helper xs n
+  where helper [] _ = []
+        helper (x:xs) 1 = helper xs n
+        helper (x:xs) i = x : helper xs (i - 1)

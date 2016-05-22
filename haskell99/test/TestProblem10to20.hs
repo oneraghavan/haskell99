@@ -31,5 +31,11 @@ shouldTestRepli =
           TestCase  ( assertEqual "should pack the array" "aaabbbccc" (repli "abc" 3))
          ]
 
+shouldTestdropEvery =
+        [
+          TestCase  ( assertEqual "should pack the array" "abdeghj" (dropEvery "abcdefghij" 3)),
+          TestCase  ( assertEqual "should pack the array" [] (dropEvery ([]::[Int]) 3))
+         ]
+
 testProblems10to20 = shouldTestEncodeModified ++ shouldTestDecodeModified ++ shouldTestDupli ++
-                      shouldTestRepli
+                      shouldTestRepli ++ shouldTestdropEvery

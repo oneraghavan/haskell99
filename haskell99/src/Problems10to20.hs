@@ -35,3 +35,18 @@ dropEvery xs n = helper xs n
   where helper [] _ = []
         helper (x:xs) 1 = helper xs n
         helper (x:xs) i = x : helper xs (i - 1)
+
+-------------------------Problem 17 NOT DONE -----------
+
+slice :: [a] -> Int -> Int -> [a]
+slice [] from till = []
+slice (x:xs) 1 till = [x] ++ slice xs 0 (till - 1)
+slice (x:xs) _ 1 = [x]
+slice (x:xs) 0 from = [x] ++ slice xs 0 (from - 1)
+slice (x:xs) from till = slice xs (from - 1) (till -1)
+
+rotate :: [a] -> Int -> [a]
+rotate [] c = []
+rotate xs 0 = xs
+rotate xs c | c < 0 = rotate xs (length xs + c)
+rotate (x:xs) c = rotate (xs ++ [x]) (c - 1)

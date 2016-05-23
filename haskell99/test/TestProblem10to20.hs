@@ -37,5 +37,18 @@ shouldTestdropEvery =
           TestCase  ( assertEqual "should pack the array" [] (dropEvery ([]::[Int]) 3))
          ]
 
+shouldTestSlice =
+        [
+          TestCase  ( assertEqual "should pack the array" "cdefg" (slice ['a','b','c','d','e','f','g','h','i','k'] 3 7)),
+          TestCase  ( assertEqual "should pack the array" [] (slice ([]::[Int]) 3 7))
+         ]
+
+shouldTestRotate =
+        [
+          TestCase  ( assertEqual "should pack the array" "defghabc" (rotate ['a','b','c','d','e','f','g','h'] 3)),
+          TestCase  ( assertEqual "should pack the array" "ghabcdef" (rotate ['a','b','c','d','e','f','g','h'] (-2))),
+          TestCase  ( assertEqual "should pack the array" [] (rotate ([]::[Int]) 3))
+         ]
+
 testProblems10to20 = shouldTestEncodeModified ++ shouldTestDecodeModified ++ shouldTestDupli ++
-                      shouldTestRepli ++ shouldTestdropEvery
+                      shouldTestRepli ++ shouldTestdropEvery ++ shouldTestSlice ++ shouldTestRotate
